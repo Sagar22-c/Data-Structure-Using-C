@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+void main()
+{
+ char arr[5][20] = {"1", "2", "3", "4", "5"};
+ char search[20];
+ int i, found=0;
+ clrscr();
+
+ printf("Enter string to search:");
+ scanf("%s",search);
+
+ for(i=0;i<5;i++)
+ {
+  if(strcmp(arr[i],search) == 0)
+  {
+   printf("Element found at index %d.\n"	,i);
+   found=1;
+   break;
+  }
+ }
+ if(!found)
+ {
+  printf("Element not found in the array.\n");
+ }
+ getch();
+}

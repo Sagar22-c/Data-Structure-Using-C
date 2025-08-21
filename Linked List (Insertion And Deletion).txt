@@ -1,0 +1,203 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node*next;
+};
+struct Node*head;
+struct Node*temp;
+struct Node*newNode;
+struct Node*ptr;
+int value;
+void create()
+{
+    
+    int i,n;
+    printf("Enter size of Node:");
+    scanf("%d",&n);
+    head=malloc(sizeof(struct Node));
+    printf("Enter Value:");
+    scanf("%d",&head->data);
+    head->next=NULL;
+    temp=head;
+    for(i=1;i<n;i++)
+    {
+        newNode=malloc(sizeof(struct Node));
+        printf("Enter Value : ");
+        scanf("%d",&newNode->data);
+        newNode->next=NULL;
+        temp->next=newNode;
+        temp=newNode;
+    }
+}
+void insertB()
+{
+   printf("Enter value at Begining:");
+   scanf("%d",&value);
+   struct Node * newNode=malloc(sizeof(struct Node));
+   newNode->data=value;
+   newNode->next=head;
+   head=newNode;
+   
+}
+void insertE()
+{
+    printf("Enter value to insert at end: ");
+    scanf("%d", &value);
+    struct Node* newNode = malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+    if(head == NULL)
+    {
+        head = newNode;
+    }
+    else
+    {
+        struct Node* temp = head;
+        while(temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+}
+void insertP()
+{
+    int pos,i=1;
+    printf("Enter Position:");
+    scanf("%d",&pos);
+    newNode=malloc(sizeof(struct Node));
+    printf("Enter Value for Any Position:");
+    scanf("%d",&newNode->data);
+    temp=head;
+    while(i<pos-1)
+    {
+        temp=temp->next;
+        i++;
+    }
+    newNode->next=temp->next;
+    temp->next=newNode;
+}
+void deleteB()
+{
+    if(head==NULL)
+    {
+        printf("List is Empty");
+    }
+    else
+    {
+        ptr=head;
+        head=head->next;
+        ptr->next=NULL;
+        free(ptr);
+        printf("Node of Begining is Deleted.");
+    }
+}
+void deleteE()
+{
+    struct Node*p;
+    if(head==NULL)
+    {
+        printf("List is Empty");
+    }
+    else
+    {
+        ptr=head;
+        while(ptr->next!=NULL)
+        {
+            p=ptr;
+            ptr=ptr->next;
+        }
+        p->next=NULL;
+        free(ptr);
+        printf("Node of End is Deleted.");
+    }
+}
+void deleteP()
+{
+    int pos,i=1;
+    printf("Enter Position:");
+    scanf("%d",&pos);
+    if(head==NULL)
+    {
+        printf("List is Empty");
+    }
+    else
+    {
+        temp=head;
+        while(i<pos-1)
+        {
+            temp=temp->next;
+            i++;
+        }
+        ptr=temp->next;
+        temp->next=ptr->next;
+        ptr->next=NULL;
+        free(ptr);
+        printf("Node is Deleted.");
+    }
+}
+void display()
+{
+    temp=head;
+    printf("Linked List:\n");
+    while(temp!=NULL)
+    {
+        printf("%d:",temp->data);
+        temp=temp->next;
+    };
+}
+int main()
+{
+    int ch;
+    do
+    {
+        printf("1.Create\n2.InsertB\n3.InsertE\n4.InsertP\n5.DeleteB\n6.DeleteE\n7.DeleteP\n8.Display\n");
+        printf("Enter Your Choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:
+            create();
+            printf("\n");
+            break;
+            
+            case 2:
+            insertB();
+            printf("\n");
+            break;
+            
+            case 3:
+            insertE();
+            printf("\n");
+            break;
+            
+            case 4:
+            insertP();
+            printf("\n");
+            break;
+            
+            case 5:
+            deleteB();
+            printf("\n");
+            break;
+            
+            case 6:
+            deleteE();
+            printf("\n");
+            break;
+            
+            case 7:
+            deleteP();
+            printf("\n");
+            
+            case 8:
+            display();
+            printf("\n");
+            
+            default:
+            printf("Invalid Choice !");
+        }
+    }while(ch!=0);
+    return 0;
+}
